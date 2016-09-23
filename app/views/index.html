@@ -1,8 +1,84 @@
 <html>
-  <head>
+    <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  	<!-- Latest compiled and minified CSS -->
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  	<!-- Optional theme -->
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+  	<!-- Latest compiled and minified JavaScript -->
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/static/css/styles.css" type="text/css">
-  </head>
-  <body>
-    The best place to start is the "WelcomeController.py" file in app/controllers.
-  </body>
+    </head>
+    <style media="screen">
+
+.error{
+  font-weight: lighter;
+  font-size: 12px;
+  color: red;
+}
+
+</style>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1 class='text-center'>Courses</h1>
+            <br>
+        </div><!-- "page-header" -->
+            <br>
+            <h2>Add a New Course</h2>
+        <div class="container well well-main">
+            <form action='/courses/add' method='POST'>
+                <div class='form-group'>
+                    <label>Name *
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <span class="error">{{message}}</span>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </label>
+                    <input class="form-control" type="text" name="name" id="name" placeholder="Name"/>
+                </div>
+                    <div class='form-group'>
+                    <label>Description
+                        <span class="error"></span>
+                    </label>
+                    <textarea name="description" class="form-control" placeholder="Description"></textarea>
+                    <br>
+                    <input class='btn btn-success pull-right' type="submit" value="Add"/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="text-muted"><strong>*</strong> These fields are required.</p>
+                        </div>
+                    </div>
+                </form>
+            </div><!-- 'form-group' -->
+        </div><!-- "container well well-main" -->
+        <br>
+        <div class="container">
+            <h2>Courses</h2>
+            <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Course Name</th>
+                <th>Description</th>
+                <th>Date Added</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for class in session['data']%}
+                    <tr>
+                        <td>{{class['title']}}</td>
+                        <td>{{class['description']}}</td>
+                        <td>{{class['created_at']}}</td>
+                        <td><a href='/courses/destroy/{{class['id']}}' class='btn btn-danger pull-left' role="button"/>Remove</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </div><!-- "Container" -->
+</body>
 </html>

@@ -1,0 +1,36 @@
+<html>
+    <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  	<!-- Latest compiled and minified CSS -->
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  	<!-- Optional theme -->
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+  	<!-- Latest compiled and minified JavaScript -->
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/css/styles.css" type="text/css">
+</head>
+<body>
+    <div class="container text-center">
+        <div class="page-header">
+            <h3>Are you sure you want to delete the following course?</h3>
+            <br>
+        </div><!-- "page-header" -->
+            <br>
+        <table class='table'>
+        <tr>
+            <td>Name:</td>
+            <td>{{course[0]['title']}}</td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td>{{course[0]['created_at']}}</td>
+        </tr>
+        </table>
+        <br>
+        <a class='btn btn-default' href='/'>No</a>
+        <form action='/courses/delete/{{course[0]['id']}}' method='POST' style='display:inline'>
+            <input type='submit' class='btn btn-danger' value='Yes! I want to delete this' /></input>
+        </form>
+    </div>
+</body>
+</html>
